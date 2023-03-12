@@ -29,11 +29,24 @@ export const Routes = [
     },
   },
   {
+    method: "PUT",
+    path: buildRoutePath("/users/:id"),
+    handler: (req, res) => {
+      const {id} = req.params
+      const {name, email} = req.body
+    
+      database.update('users', name, email, id)
+
+      return res.writeHead(204).end();
+    },
+  },
+  {
     method: "DELETE",
     path: buildRoutePath("/users/:id"),
     handler: (req, res) => {
-      console.log('deletado')
-      return res.end();
+      const {id} = req.params
+      database.delete('users', id)
+      return res.writeHead(204).end();
     },
   },
 ];
